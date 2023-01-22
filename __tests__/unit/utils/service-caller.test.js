@@ -45,6 +45,35 @@ describe('serviceCaller', () => {
     });
   });
 
+  it('should not retry the call if axios returns a 400 status', async () => {
+    const method = 'POST';
+    const url = '/example';
+    const data = { test: 'data' };
+    const query = { };
+    const expectedUrl = new URL(`${Config.serviceUrl}/example`);
+    const expectedHeaders = {
+      accept: 'application/json',
+      'x-api-key': Config.apiKey,
+    };
+    const expectedErrorData = { response: { status: 400 } };
+
+    axios
+      .mockRejectedValue(expectedErrorData);
+
+    await expect(serviceCaller({
+      method, url, data, query,
+    })).rejects.toEqual(expectedErrorData);
+
+    expect(axios).toHaveBeenCalledWith({
+      method: 'post',
+      headers: expectedHeaders,
+      url: expectedUrl,
+      data,
+      query,
+    });
+    expect(axios).toHaveBeenCalledTimes(1);
+  });
+
   it('should retry the call if axios returns a 500 status', async () => {
     const method = 'POST';
     const url = '/example';
