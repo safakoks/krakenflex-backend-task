@@ -7,13 +7,51 @@ Welcome!
 
 This small program will retrieve all outages for a site. It will then filter out any outages that began before a specific date or don't have an ID that is in the list of devices in the site information. For the remaining outages, it will attach the display name of the device in the site information to each appropriate outage and send this list of outages to the appropriate endpoint for the site with the ID of the selected site. Let's get started!
 
+### Sequence Diagram of General Flow
+```mermaid
+sequenceDiagram
+    participant MainService
+    participant OutageService
+    participant SiteService
+    participant SiteServiceCaller
+    participant OutageServiceCaller
+    participant API
+
+
+    MainService->>+OutageService: getSiteOutages()
+    
+    OutageService->>+SiteService: getSiteInfo()
+    
+    SiteService->>+SiteServiceCaller: getSiteInfo()
+
+    SiteServiceCaller->>+API: GET : /site-info/{siteId}
+    API-->>-SiteServiceCaller: Site Information
+
+    SiteServiceCaller-->>-SiteService: Site Information
+    SiteService-->>-OutageService: Site Information
+    OutageService->>+OutageServiceCaller: getOutages()
+
+    OutageServiceCaller->>+API: GET : /outages
+    API-->>-OutageServiceCaller: All Outages
+
+    OutageServiceCaller-->>-OutageService: All Outages
+    Note over OutageService: Format And Filter Outages
+    OutageService-->>-MainService: Site Outages
+    
+    MainService->>+OutageService: addOutages()
+    OutageService->>+OutageServiceCaller: addOutagesToSite()
+
+    OutageServiceCaller->>+API: POST : /site-outages/{siteId}
+    API-->>-OutageServiceCaller: Success
+
+    OutageServiceCaller-->>-OutageService: Success
+    OutageService-->>-MainService: Success
+```
+
 ### Requirements :spiral_notepad:
-  Node Version 
-  v14.x
-  npm Version 
-  6.14.x
-  yarn Version 
-  1.22.x
+  - Node Version : v14.x
+  - npm Version : 6.14.x
+  - yarn Version : 1.22.x
 #### Installing Dependencies
  
 With `npm`
