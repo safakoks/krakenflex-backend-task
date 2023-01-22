@@ -1,6 +1,6 @@
 
 # KrakenFlex Backend Task :octopus:
-
+[![Node.js CI](https://github.com/safakoks/krakenflex-backend-task/actions/workflows/node.js.yml/badge.svg)](https://github.com/safakoks/krakenflex-backend-task/actions/workflows/node.js.yml)
 ## Introduction :scroll:
 
 Welcome!
