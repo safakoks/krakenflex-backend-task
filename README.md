@@ -9,11 +9,11 @@ This small program will retrieve all outages for a site. It will then filter out
 
 ### Requirements :spiral_notepad:
   Node Version 
-  **=> 14.17.0**
+  v14.x
   npm Version 
-  **=> 6.14.3**
+  6.14.x
   yarn Version 
-  **=> 1.22.19**
+  1.22.x
 #### Installing Dependencies
  
 With `npm`
