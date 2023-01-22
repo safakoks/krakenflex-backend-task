@@ -1,7 +1,8 @@
 
 # KrakenFlex Backend Task :octopus:
 [![Node.js CI](https://github.com/safakoks/krakenflex-backend-task/actions/workflows/node.js.yml/badge.svg)](https://github.com/safakoks/krakenflex-backend-task/actions/workflows/node.js.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/{username}/{repo}/badge.svg)]
+![Known Vulnerabilities](https://snyk.io/test/github/safakoks/krakenflex-backend-task/badge.svg)
+[![codecov](https://codecov.io/github/safakoks/krakenflex-backend-task/branch/main/graph/badge.svg?token=D187V4SU8E)](https://codecov.io/github/safakoks/krakenflex-backend-task)
 ## Introduction :scroll:
 
 Welcome!
